@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.SunnyWeather" parent="Base.Theme.SunnyWeather" />
+
+    <style name="WeatherActivityTheme" parent="Theme.SunnyWeather">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>
