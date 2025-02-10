@@ -3,6 +3,7 @@ package com.sunnyweather.android.ui.place
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sunnyweather.android.MainActivity
 import com.sunnyweather.android.R
 import com.sunnyweather.android.ui.weather.WeatherActivity
 
@@ -96,11 +98,13 @@ class PlaceFragment : Fragment() {
         placeViewModel.getSavedPlaceResultLiveData.observe(viewLifecycleOwner) { result ->
             result.getOrNull()?.let { place ->
                 // 跳转到天气界面
-                Intent(context, WeatherActivity::class.java).apply {
-                    putExtra("location_lng", place.location.lng)
-                    putExtra("location_lat", place.location.lat)
-                    putExtra("place_name", place.name)
-                    startActivity(this)
+                if (activity is MainActivity) {
+                    Intent(context, WeatherActivity::class.java).apply {
+                        putExtra("location_lng", place.location.lng)
+                        putExtra("location_lat", place.location.lat)
+                        putExtra("place_name", place.name)
+                        startActivity(this)
+                    }
                 }
             } ?: run {
                 Toast.makeText(context, "获取失败: ${result.exceptionOrNull()?.message}", Toast.LENGTH_SHORT).show()

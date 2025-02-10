@@ -17,7 +17,6 @@ object PlaceDao {
 
     fun getSavedPlace(): Place {
         val placeJson = sharedPreferences().getString("place", "")//我们先将JSON字符串从SharedPreferences文件中读取出来
-        Log.d("ffr", "getSavedPlace: $placeJson")
         return Gson().fromJson(placeJson, Place::class.java)//通过GSON将JSON字符串解析成Place对象并返回。
     }
 
