@@ -2,11 +2,8 @@ package com.sunnyweather.android.ui.weather
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -18,7 +15,6 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -27,9 +23,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Weather
 import com.sunnyweather.android.logic.model.getSky
-import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.math.abs
 
 class WeatherActivity : AppCompatActivity() {
     val weatherViewModel by lazy { ViewModelProvider(this)[WeatherViewModel::class.java] }
@@ -181,7 +177,7 @@ class WeatherActivity : AppCompatActivity() {
                 // 判断右滑手势：水平滑动距离 > 垂直滑动距离，且右滑距离超过 100px
                 val deltaX = e2.x - (e1?.x ?: 0f)
                 val deltaY = e2.y - (e1?.y ?: 0f)
-                if (kotlin.math.abs(deltaX) > kotlin.math.abs(deltaY) && deltaX > 100) {
+                if (abs(deltaX) > abs(deltaY) && deltaX > 100) {
                     drawerLayout.openDrawer(GravityCompat.START)
                     return true
                 }
